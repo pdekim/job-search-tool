@@ -2,4 +2,4 @@
 .env
 __pycache__
 env-jobtool
-
+website/applications.db
