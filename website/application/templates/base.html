@@ -24,11 +24,12 @@
             <div class="navbar-nav">
               <a class="nav-item nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="/analysis">Analysis</a>
-                {% if session['name'] %}
+                {% if session['username'] %}
                     <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
                 {% else %}
                     <a class="nav-item nav-link" id="login" href="/login">Login</a>
                 {% endif %}
+                <a class="nav-item nav-link" href="/signup">Signup</a>
             </div>
           </div>
         </nav>

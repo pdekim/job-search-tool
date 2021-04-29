@@ -8,10 +8,15 @@ def create_app():
     with app.app_context():
         # Imports
         from .views import view
-        from .database import DataBase
+        from .database import Database
+        from .auth import auth
 
         # Register Routes
-        app.register_blueprint(view, url_prefix="/")
 
+        # Blueprint for auth routes
+        app.register_blueprint(auth)
+
+        # Blueprint for view routes
+        app.register_blueprint(view, url_prefix="/")
 
         return app

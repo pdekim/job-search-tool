@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Signup{% endblock %}
 
 {% block content %}
 <style type="text/css">
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-.login-page {
+.signup-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
@@ -51,9 +51,10 @@
 
 </style>
 
-<div class="login-page">
+<div class="signup-page">
   <div class="form">
-    <form class="login-form" action="#" method="POST">
+    <form class="signup-form" action="#" method="POST">
+      <input type="text" name="name" id="name" placeholder="Name"/>
       <input type="text" name="email" id="email" placeholder="Email"/>
       <input type="text" name="password" id="password" placeholder="Password"/>
       <button type="submit" class="btn btn-success mb-2">Login</button>

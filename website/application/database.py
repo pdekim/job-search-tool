@@ -9,7 +9,7 @@ FILE = "applications.db"
 PLAYLIST_TABLE = "Applications"
 
 
-class DataBase:
+class Database:
     """
     used to connect, write to and read from a local sqlite3 database
     """
@@ -39,6 +39,6 @@ class DataBase:
         :return: None
         """
         query = f"""CREATE TABLE IF NOT EXISTS {PLAYLIST_TABLE}
-                    (name TEXT, content TEXT, time Date, id INTEGER PRIMARY KEY AUTOINCREMENT)"""
+                    (username TEXT, content TEXT, time Date, id INTEGER PRIMARY KEY AUTOINCREMENT)"""
         self.cursor.execute(query)
         self.conn.commit()
