@@ -5,7 +5,7 @@ from .database import Database
 view = Blueprint("views", __name__)
 
 # Global constants
-NAME_KEY = 'username'
+USER_KEY = 'name'
 
 # Views
 @view.route("/")
@@ -15,7 +15,7 @@ def home():
     displays home page if logged in
     :return: None
     """
-    if NAME_KEY not in session:
+    if USER_KEY not in session:
         flash("Please login to view your home page.")
         return redirect(url_for("auth.login"))
 
@@ -28,7 +28,7 @@ def analysis():
     displays analysis page if logged in
     :return: None
     """
-    if NAME_KEY not in session:
+    if USER_KEY not in session:
         flash("Please login to view your analysis page.")
         return redirect(url_for("auth.login"))
 

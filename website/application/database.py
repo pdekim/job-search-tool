@@ -6,7 +6,8 @@ import time
 
 # Constants
 FILE = "applications.db"
-PLAYLIST_TABLE = "Applications"
+APPLICATIONS_TABLE = "Applications"
+USERS_TABLE = "Users"
 
 
 class Database:
@@ -24,7 +25,8 @@ class Database:
             print(e)
 
         self.cursor = self.conn.cursor()
-        self._create_table()
+        self.create_app_table()
+        self.create_user_table()
 
     def close(self):
         """
@@ -33,12 +35,47 @@ class Database:
         """
         self.conn.close()
 
-    def create_table(self):
+    def create_app_table(self):
         """
-        create new database table if one doesn't exist
+        create new app database table if one doesn't exist
         :return: None
         """
-        query = f"""CREATE TABLE IF NOT EXISTS {PLAYLIST_TABLE}
+        query = f"""CREATE TABLE IF NOT EXISTS {APPLICATIONS_TABLE}
                     (username TEXT, content TEXT, time Date, id INTEGER PRIMARY KEY AUTOINCREMENT)"""
         self.cursor.execute(query)
         self.conn.commit()
+
+    def create_user_table(self):
+        """
+        create new user database table if one doesn't exist
+        :return: None
+        """
+        query = f"""CREATE TABLE IF NOT EXISTS {USERS_TABLE}
+                    (name TEXT NOT NULL, email TEXT NOT NULL, password TEXT, time Date, id INTEGER PRIMARY KEY AUTOINCREMENT)"""
+        self.cursor.execute(query)
+        self.conn.commit()
+    
+    def save_new_user(self, name, email, password):
+        """
+        create new user entry in table
+        :param name: str
+        :param email: str
+        :param password: str
+        :return: None
+        """
+        query = f"INSERT INTO {USERS_TABLE} VALUES (?, ?, ?, ?, ?)"
+        self.cursor.execute(query, (name, email, password, datetime.now(), None))
+        self.conn.commit()
+
+    def get_user_info(self, email):
+        """
+        returns specified user information
+        :param email: str
+        :return: None
+        """
+        query = f"SELECT * FROM {USERS_TABLE} WHERE EMAIL = ?"
+        self.cursor.execute(query, (email,))
+
+        return self.cursor.fetchall()
+
+    
