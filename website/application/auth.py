@@ -17,7 +17,7 @@ def login():
     """
     if request.method == "POST":  # if user attempts to login
         email = request.form["email"]
-        password = request.form['password']
+        password = request.form['password'].encode('utf-8')
 
         db = Database()
         user_info = db.get_user_info(email)
@@ -45,7 +45,7 @@ def signup():
     if request.method == "POST":
         name = request.form['name']
         email = request.form['email']
-        password = request.form['password']
+        password = request.form['password'].encode('utf-8')
         encrypted_password = get_hashed_password(password)
 
         db = Database()
