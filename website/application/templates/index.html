@@ -4,13 +4,52 @@
 
 
 {% block content %}
+
 <div class="row" style="padding-top:10px;" >
     <div class="col"><hr></div>
-    <div class="col-auto"><p class="h3" align="center"> Hello {{session['username']}}! </p></div>
+    <div class="col-auto"><p class="h3" align="center"> Hello {{session['name']}}! </p></div>
     <div class="col"><hr></div>
 </div>
-<div class="container">
-</div>
+
+<table id="datatable" class="table table-hover">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Date Applied</th>
+              <th scope="col">Company</th>
+              <th scope="col">Position</th>
+              <th scope="col">Experience</th>
+              <th scope="col">Response</th>
+            </tr>
+        </thead>
+</table>
+
+<script>
+function setupData() {
+    $(document).ready(function () {
+        $('#datatable').DataTable({
+            "ajax": {
+                "url": "/index_get_data",
+                "dataType": "json",
+                "dataSrc": "data",
+                "contentType":"application/json"
+            },
+            "columns": [
+                {"data": "id"},
+                {"data": "date"},
+                {"data": "company"},
+                {"data": "position"},
+                {"data": "experience"},
+                {"data": "status"}
+            ]
+        });
+    });
+}
+$( window ).on( "load", setupData );
+</script>
+
 {% endblock %}
+
+
 
 

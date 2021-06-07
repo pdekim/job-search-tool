@@ -41,8 +41,20 @@ class Database:
         :return: None
         """
         query = f"""CREATE TABLE IF NOT EXISTS {APPLICATIONS_TABLE}
-                    (username TEXT, content TEXT, time Date, id INTEGER PRIMARY KEY AUTOINCREMENT)"""
+                    (date Date, company TEXT, position TEXT, level TEXT, response TEXT, id INTEGER PRIMARY KEY AUTOINCREMENT)"""
         self.cursor.execute(query)
+        self.conn.commit()
+    
+    def save_new_user(self, dateApplied, companyName, positionTitle, experienceLevel):
+        """
+        create new user entry in table
+        :param name: str
+        :param email: str
+        :param password: str
+        :return: None
+        """
+        query = f"INSERT INTO {USERS_TABLE} VALUES (?, ?, ?, ?, ?, ?)"
+        self.cursor.execute(query, (dateApplied, companyName, positionTitle, experienceLevel, None, None))
         self.conn.commit()
 
     def create_user_table(self):
